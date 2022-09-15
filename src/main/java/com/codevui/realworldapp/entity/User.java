@@ -1,5 +1,6 @@
 package com.codevui.realworldapp.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -45,5 +47,12 @@ public class User {
 
     @ManyToMany(mappedBy = "followers")
     private Set<User> followings; // dang follow ai
+
+    @OneToMany(mappedBy = "author")
+    private List<Article> articles;
+
+    @ManyToMany()
+    @JoinTable(name = "user_favorite_article", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
+    private Set<Article> articleFavorited;
 
 }

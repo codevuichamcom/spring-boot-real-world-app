@@ -98,6 +98,7 @@ public class UserServiceImpl implements UserService {
         return buildProfileResponse(user, isFollowing);
     }
 
+    @Override
     public User getUserLoggedIn() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
